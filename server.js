@@ -20,20 +20,39 @@ servidor.get('/hospitais', async (request, response)=>{
 servidor.get('/hospitais/:id', (request, response)=>{
     const hospitalId = request.params.hospitalId
     controler.getById(hospitalId)
-    .then(hospital =>{
-        if(!hospital){
-            response.sendStatus(404)
-        }else{
-            response.send(hospital)
-        }
-    })
-    .catch(error =>{
-        if(error.name === "CastError"){
-            response.sendStatus(400)
-        }else{
-            response.sendStatus(500)
-        }
-    })
+        .then(hospital =>{
+            if(!hospital){
+                response.sendStatus(404)
+            }else{
+                response.send(hospital)
+            }
+        })
+        .catch(error =>{
+            if(error.name === "CastError"){
+                response.sendStatus(400)
+            }else{
+                response.sendStatus(500)
+            }
+        })
+})
+
+servidor.patch('/hospitais/:id', (request, response)=>{
+    const id = request.params.id
+    controler.update(id, request.body)
+        .then(hospital => {
+            if(!hospital){
+                response.sendStatus(404)
+            }else{
+                response.send(hospital)
+            }
+        })
+        .catch(error => {
+            if(error.name === "MongoError" || error.name === "CastError"){
+                response.sendStatus(400)
+            }else{
+                response.sendStatus(500)
+            }
+        })
 })
 
 servidor.listen(PORT)
