@@ -6,8 +6,9 @@ const hospitaisSchema = new Schema({
     nomeUser: {type: String},
     image: {type: String},
     nota: {type: Number, required: true},
-    relato: {type: String, required: true}
+    relato: {type: String, required: true},
 })
 
-const hospitaisModel = mongoose.model("hospitais", hospitaisSchema)
-module.export = hospitaisModel
+const hospitaisModel = mongoose.model("hospitais", hospitaisSchema);
+
+module.exports = hospitaisModel

@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const servidor = express()
 const controller = require('./hospitaisController')
-const PORT = 3000
+const PORT = 8000
 
 servidor.use(cors())
 servidor.use(bodyParser.json())
@@ -12,7 +12,7 @@ servidor.get('/',(request, response)=>{
     response.send('Olá, mundo!')
 })
 
-servidor.get('/hospitais', async (request, response)=>{
+servidor.get('/hospitais', async (request, response) => {
     controller.getAll()
     .then(hospitais => response.send(hospitais))
 })

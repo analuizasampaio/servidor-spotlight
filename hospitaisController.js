@@ -1,3 +1,4 @@
+const {connect} = require('./hospitaisRepository')
 const hospitaisModel = require('./hospitaisSchema')
 
 connect()
@@ -34,5 +35,5 @@ module.exports = {
     getById,
     add,
     remove,
-    update
+    update,
 }
