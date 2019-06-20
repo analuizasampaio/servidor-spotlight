@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const servidor = express()
-const controler = require('./hospitaisController')
+const controller = require('./hospitaisController')
 const PORT = 3000
 
 servidor.use(cors())
@@ -13,13 +13,13 @@ servidor.get('/',(request, response)=>{
 })
 
 servidor.get('/hospitais', async (request, response)=>{
-    controler.getAll()
+    controller.getAll()
     .then(hospitais => response.send(hospitais))
 })
 
 servidor.get('/hospitais/:id', (request, response)=>{
     const hospitalId = request.params.hospitalId
-    controler.getById(hospitalId)
+    controller.getById(hospitalId)
         .then(hospital =>{
             if(!hospital){
                 response.sendStatus(404)
@@ -38,7 +38,7 @@ servidor.get('/hospitais/:id', (request, response)=>{
 
 servidor.patch('/hospitais/:id', (request, response)=>{
     const id = request.params.id
-    controler.update(id, request.body)
+    controller.update(id, request.body)
         .then(hospital => {
             if(!hospital){
                 response.sendStatus(404)
@@ -48,6 +48,21 @@ servidor.patch('/hospitais/:id', (request, response)=>{
         })
         .catch(error => {
             if(error.name === "MongoError" || error.name === "CastError"){
+                response.sendStatus(400)
+            }else{
+                response.sendStatus(500)
+            }
+        })
+})
+
+servidor.post('/hospitais', (request, response)=>{
+    controller.add(request.body)
+        .then(hospital =>{
+            const _id = hospital._id
+            response.send(_id)
+        })
+        .catch(error =>{
+            if(error.name === "ValidationError"){
                 response.sendStatus(400)
             }else{
                 response.sendStatus(500)
