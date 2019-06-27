@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const MONGO_URL = "mongodb://localhost:27017/hospitais";
+const MONGO_URL = "mongodb://localhost:27017/spotlight";
 
 function connect () {
     mongoose.connect(MONGO_URL,
@@ -8,7 +8,7 @@ function connect () {
         if(error) {
           console.error("Algo de errado não está certo: ", error)
         } else {
-          console.log("Conectado no mongoDB.")
+          console.log("Conectado no mongoDB! o/")
         }
       }
     );
