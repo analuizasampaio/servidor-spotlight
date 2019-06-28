@@ -19,6 +19,6 @@ const SpotlighSchema = new Schema({
     ]
 })
 
-const spotlightModel = mongoose.model("hospitais", SpotlighSchema);
+const spotlightModel = mongoose.model("spotlight", SpotlighSchema);
 
 module.exports = spotlightModel
