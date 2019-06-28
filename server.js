@@ -73,6 +73,21 @@ servidor.post('/usuarios', (request, response)=>{
         })
 })
 
+servidor.post('/usuarios/login', (request, response) => {
+    SpotlightController.login(request.body)
+      .then(loginResponse => {
+        response.send(loginResponse)
+      })
+      .catch(error => {
+        if(error.name === "ValidationError"){
+          console.log(error)
+          response.sendStatus(400)
+        } else {
+          console.log(error)
+          response.sendStatus(500)
+        }
+})
+
 servidor.delete('/usuarios/:id', (request, response)=>{
     controller.remove(request.params.id)
         .then(usuario =>{
@@ -92,5 +107,6 @@ servidor.delete('/usuarios/:id', (request, response)=>{
             } 
           })
 })
+
 servidor.listen(PORT)
 console.info(`Rodando na porta ${PORT}`)
