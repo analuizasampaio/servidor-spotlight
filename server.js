@@ -86,6 +86,7 @@ servidor.post('/usuarios/login', (request, response) => {
           console.log(error)
           response.sendStatus(500)
         }
+    })
 })
 
 servidor.delete('/usuarios/:id', (request, response)=>{
