@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const servidor = express()
 const controller = require('./SpotlightController')
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 const jwt = require('jsonwebtoken')
 
 servidor.use(cors())
