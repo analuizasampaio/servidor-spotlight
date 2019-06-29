@@ -44,26 +44,25 @@ const update = (id, usuario) =>{
 }
 
 const login = async (loginData) => {
-    const usuarioEncontrado = await spotlightModel.findOne(
-      { email: loginData.email }
-    )
-  
-    if (usuarioEncontrado) {
-      const senhaCorreta = bcrypt.compareSync(loginData.senha, usuarioEncontrado.senha)
-  
-      if (senhaCorreta) {
-        const token = jwt.sign(
-          { email: usuarioEncontrado.email, id: usuarioEncontrado._id },
-          process.env.PRIVATE_KEY
-        )
-        return { auth: true, token };
-      } else {
-        throw new Error('Senha incorreta, prestenção parça')
-      }
+  const usuarioEncontrado = await spotlightModel.findOne(
+    { email: loginData.email }
+  )
+  if (usuarioEncontrado) {
+    const senhaCorreta = bcrypt.compareSync(loginData.senha, usuarioEncontrado.senha)
+    if (senhaCorreta) {
+      const token = jwt.sign(
+        { email: usuarioEncontrado.email, id: usuarioEncontrado._id },
+        process.env.PRIVATE_KEY
+      )
+      return { auth: true, token };
     } else {
-      throw new Error('Email não está cadastrado')
+      throw new Error('Senha incorreta, prestenção parça')
     }
+  } else {
+    throw new Error('Email não está cadastrado')
+  }
 }
+
 
 module.exports = {
     getAll,

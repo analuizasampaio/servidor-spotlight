@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const servidor = express()
 const controller = require('./SpotlightController')
 const PORT = 8000
+const jwt = require('jsonwebtoken')
 
 servidor.use(cors())
 servidor.use(bodyParser.json())
@@ -13,9 +14,25 @@ servidor.get('/',(request, response)=>{
 })
 
 servidor.get('/usuarios', async (request, response) => {
-    controller.getAll()
-    .then(usuarios => response.send(usuarios))
-})
+    const authHeader = request.get('authorization').split(' ')[1]
+    let auth = false
+
+    if (authHeader) {
+        jwt.verify(authHeader, process.env.PRIVATE_KEY, function(error, decoded) {
+          if (error) {
+            response.send(401)
+          } else {
+            auth = true
+          }
+        })
+      } else {
+        response.send(401)
+      }
+      if (auth) {
+        controller.getAll()
+        .then(usuarios => response.send(usuarios))
+      }
+    })
 
 servidor.get('/usuarios/:id', (request, response)=>{
     const id = request.params.id
@@ -74,7 +91,7 @@ servidor.post('/usuarios', (request, response)=>{
 })
 
 servidor.post('/usuarios/login', (request, response) => {
-    SpotlightController.login(request.body)
+    controller.login(request.body)
       .then(loginResponse => {
         response.send(loginResponse)
       })
