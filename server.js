@@ -41,8 +41,7 @@ servidor.get('/usuarios/:id', (request, response)=>{
             if(!usuario){
                 response.sendStatus(404)
             }else{
-                response.send(usuario
-    )
+                response.send(usuario)
             }
         })
         .catch(error =>{
@@ -58,8 +57,7 @@ servidor.patch('/usuarios/:id', (request, response)=>{
     const id = request.params.id
     controller.update(id, request.body)
         .then(usuario => {
-            if(!usuario
-){
+            if(!usuario){
                 response.sendStatus(404)
             }else{
                 response.send(usuario
