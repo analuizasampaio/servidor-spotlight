@@ -1,4 +1,4 @@
-require('dotenv-safe').load()
+
 const {connect} = require('./SpotlightRepository')
 const spotlightModel = require('./SpotlightSchema')
 const bcrypt = require('bcryptjs')
