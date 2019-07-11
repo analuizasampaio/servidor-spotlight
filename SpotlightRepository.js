@@ -1,4 +1,4 @@
-require('dotenv-safe').load()
+
 const mongoose = require("mongoose");
 const MONGO_URL = process.env.MONGODB_URI;
 
