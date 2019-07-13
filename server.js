@@ -3,16 +3,20 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const servidor = express()
 const controller = require('./SpotlightController')
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8001
 const jwt = require('jsonwebtoken')
 
 servidor.use(cors())
 servidor.use(bodyParser.json())
 
 servidor.get('/',(request, response)=>{
+    response.send("oi, bb!")
+
+})
+
+servidor.get('/hospitais/ranking', (request, response)=>{
     controller.sort()
     .then(hospitais => response.send(hospitais))
-
 })
 
 servidor.get('/usuarios', async (request, response) => {
