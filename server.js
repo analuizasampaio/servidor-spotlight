@@ -20,24 +20,8 @@ servidor.get('/hospitais/ranking', (request, response)=>{
 })
 
 servidor.get('/usuarios', async (request, response) => {
-    const authHeader = request.get('authorization').split(' ')[1]
-    let auth = false
-
-    if (authHeader) {
-        jwt.verify(authHeader, process.env.PRIVATE_KEY, function(error, decoded) {
-          if (error) {
-            response.send(401)
-          } else {
-            auth = true
-          }
-        })
-      } else {
-        response.send(401)
-      }
-      if (auth) {
-        controller.getAll()
-        .then(usuarios => response.send(usuarios))
-      }
+    controller.getAll()
+    .then(usuario => response.send(usuario))
     })
 
 servidor.get('/usuarios/:id', (request, response)=>{
