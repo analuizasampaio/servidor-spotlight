@@ -7,11 +7,11 @@ const SpotlighSchema = new Schema({
     email: {type: String, required: true},
     senha: {type: String, required: true},
     image: {type: String},
-            hospital: {type: String},
-            endereco: {type: String},
-            pontuacao: {type: String, required: true},
-            nota: {type: Number},
-            relato: {type:String}
+    hospital: {type: String},
+    endereco: {type: String},
+    pontuacao: {type: String},
+    nota: {type: Number},
+    relato: {type:String}
 
 })
 
