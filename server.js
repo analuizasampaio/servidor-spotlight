@@ -10,7 +10,9 @@ servidor.use(cors())
 servidor.use(bodyParser.json())
 
 servidor.get('/',(request, response)=>{
-    response.send('Olá, mundo!')
+    controller.sort()
+    .then(hospitais => response.send(hospitais))
+
 })
 
 servidor.get('/usuarios', async (request, response) => {

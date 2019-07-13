@@ -7,16 +7,12 @@ const SpotlighSchema = new Schema({
     email: {type: String, required: true},
     senha: {type: String, required: true},
     image: {type: String},
-    formulario: [
-        {
             hospital: {type: String},
             endereco: {type: String},
-            pontuacao: {type: Number},
+            pontuacao: {type: String, required: true},
             nota: {type: Number},
             relato: {type:String}
 
-        }
-    ]
 })
 
 const spotlightModel = mongoose.model("spotlight", SpotlighSchema);

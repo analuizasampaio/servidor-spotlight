@@ -12,12 +12,19 @@ const getAll = async () =>{
     })
 }
 
+const sort = async () =>{
+  return spotlightModel.find({}, "pontuacao", (error, usuario)=>{
+    return usuario
+  })
+}
+
 const getById = (id) =>{
     return spotlightModel.findById(id)
 }
 
 const add = async (usuario) => {
-    const usuarioEncontrado = await spotlightModel.findOne({ email: usuario.email })
+    const usuarioEncontrado = await spotlightModel.findOne(
+      { email: usuario.email })
   
     if (usuarioEncontrado) {
       throw new Error('Email já cadastrado')
@@ -25,7 +32,7 @@ const add = async (usuario) => {
   
     const salt = bcrypt.genSaltSync(10)
     const senhaCriptografada = bcrypt.hashSync(usuario.senha, salt)
-    treinador.senha = senhaCriptografada
+    usuario.senha = senhaCriptografada
 
     const novoUsuario = new spotlightModel(usuario)
     return novoUsuario.save()
@@ -70,5 +77,6 @@ module.exports = {
     add,
     remove,
     update,
-    login
+    login,
+    sort
 }
