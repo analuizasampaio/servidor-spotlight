@@ -61,7 +61,7 @@ const login = async (loginData) => {
         { email: usuarioEncontrado.email, id: usuarioEncontrado._id },
         process.env.PRIVATE_KEY
       )
-      return { auth: true, token };
+      return { auth: true, token, id };
     } else {
       throw new Error('Senha incorreta, prestenção parça')
     }
