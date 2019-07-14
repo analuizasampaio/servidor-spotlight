@@ -9,7 +9,7 @@ const SpotlighSchema = new Schema({
     image: {type: String},
     hospital: {type: String},
     endereco: {type: String},
-    pontuacao: {type: String},
+    pontuacao: {type: Number},
     nota: {type: Number},
     relato: {type:String}
 
