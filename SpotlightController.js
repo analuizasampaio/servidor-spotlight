@@ -13,10 +13,9 @@ const getAll = async () =>{
 }
 
 const sort = async () =>{
-  return spotlightModel.find({}, "hospital","endereco","pontuacao","nota","relato", (error, hospital)=>{
-    return hospital
+  return spotlightModel.find({}, "pontuacao", (error, usuario)=>{
+    return usuario
   })
-  
 }
 
 const getById = (id) =>{
@@ -62,7 +61,7 @@ const login = async (loginData) => {
         { email: usuarioEncontrado.email, id: usuarioEncontrado._id },
         process.env.PRIVATE_KEY
       )
-      return { auth: true, token};
+      return { auth: true, token };
     } else {
       throw new Error('Senha incorreta, prestenção parça')
     }
