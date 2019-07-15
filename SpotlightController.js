@@ -13,9 +13,10 @@ const getAll = async () =>{
 }
 
 const sort = async () =>{
-  return spotlightModel.find({}, "pontuacao", (error, usuario)=>{
-    return usuario
+  return spotlightModel.find({}, "hospital","endereco","pontuacao","nota","relato", (error, hospital)=>{
+    return hospital
   })
+  
 }
 
 const getById = (id) =>{
